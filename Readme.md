@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Антон Куринной](https://up.htmlacademy.ru/javascript/18/user/1170603).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Столпнер](https://htmlacademy.ru/profile/stolpnera).
 
 ---
 
