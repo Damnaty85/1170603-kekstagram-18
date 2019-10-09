@@ -1,6 +1,7 @@
 'use strict';
 
 // Записываем данные в переменные
+
 var PHOTO_COUNT = 25;
 var MIN_LIKES = 15;
 var MAX_LIKES = 200;
@@ -26,19 +27,24 @@ var DESCRIPTIONS = [
 ];
 
 // Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
+
 var getRandomNumber = function (min, max) {
   return Math.round((Math.random() * (max - min)) + min);
 };
 
 //  Обращается к случайному элементу в массиве, генерируя случайное число с плавающей точкой от нуля до длины массива и округляя его до ближайшего целого числа
+
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
 // Функция возвращает случайные два коментария из массива
+
 var generateUserComments = function (comments) {
+
   var userComments = [];
   var pictureQuantityComments = getRandomNumber(MIN_COMMENT, MAX_COMMENT);
+
   for (var i = 0; i < pictureQuantityComments; i++) {
     userComments.push(getRandomElement(comments));
   }
@@ -46,8 +52,10 @@ var generateUserComments = function (comments) {
 };
 
 // Функция создает объекты и записывает их в массив
+
 var generatePicturesObject = function (url, likes, comments, description) {
   var pictureData = [];
+
   for (var i = 0; i < PHOTO_COUNT; i++) {
     url = 'photos/' + (i + 1) + '.jpg';
     likes = getRandomNumber(MIN_LIKES, MAX_LIKES);
@@ -55,6 +63,7 @@ var generatePicturesObject = function (url, likes, comments, description) {
     description = getRandomElement(DESCRIPTIONS);
 
     // добавляем значения в массив и объект
+
     var PictureArray = {url: url, likes: likes, comments: comments, description: description};
     pictureData.push(PictureArray);
   }
@@ -62,8 +71,11 @@ var generatePicturesObject = function (url, likes, comments, description) {
 };
 
 // Находим необходимые блоки и записываем в них данные
+
 var renderUserPicture = function (picture) {
+
   // Находим template для вывода данныых
+
   var userPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var pictureElement = userPictureTemplate.cloneNode(true);
 
@@ -75,13 +87,17 @@ var renderUserPicture = function (picture) {
 };
 
 // Отрисовываем шаблон на странице
+
 var renderUserPictures = function (pictures) {
+
   // контейнер дл вывода картинок
+
   var userPicturesItem = document.querySelector('.pictures');
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < pictures.length; i++) {
     fragment.appendChild(renderUserPicture(pictures[i]));
   }
+
   userPicturesItem.appendChild(fragment);
 };
 
