@@ -16,7 +16,14 @@ var COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-var DESCRIPTIONS = [];
+var DESCRIPTIONS = [
+  'Мы сделали это!',
+  'Что вы об этом думаете?',
+  'Работать. Копить. Путешествовать. Повторить.',
+  'Нечего добавить',
+  '*Добавить остроумную подпись*',
+  'Да, еще одно фото'
+];
 
 // Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
 var getRandomNumber = function (min, max) {
@@ -26,10 +33,6 @@ var getRandomNumber = function (min, max) {
 //  Обращается к случайному элементу в массиве, генерируя случайное число с плавающей точкой от нуля до длины массива и округляя его до ближайшего целого числа
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
-};
-
-var createPictureElement = function (url, likes, comments, description) {
-  return {url: url, likes: likes, comments: comments, description: description};
 };
 
 // Функция возвращает случайные два коментария из массива
@@ -43,27 +46,25 @@ var generateUserComments = function (comments) {
 };
 
 // Функция создает объекты и записывает их в массив
-var generatePicturesObject = function () {
+var generatePicturesObject = function (url, likes, comments, description) {
   var pictureData = [];
   for (var i = 0; i < PHOTO_COUNT; i++) {
-    var pictureURL = 'photos/' + (i + 1) + '.jpg';
-    var pictureLikes = getRandomNumber(MIN_LIKES, MAX_LIKES);
-    var userComments = generateUserComments(COMMENTS);
-    var pictureDescription = getRandomElement(DESCRIPTIONS);
+    url = 'photos/' + (i + 1) + '.jpg';
+    likes = getRandomNumber(MIN_LIKES, MAX_LIKES);
+    comments = generateUserComments(COMMENTS);
+    description = getRandomElement(DESCRIPTIONS);
 
-    // добавляем значения в массив
-    pictureData.push(createPictureElement(pictureURL, pictureLikes, userComments, pictureDescription));
+    // добавляем значения в массив и объект
+    var PictureArray = {url: url, likes: likes, comments: comments, description: description};
+    pictureData.push(PictureArray);
   }
   return pictureData;
 };
 
-// Находим контейнер и шаблон для вывода данныых
-var userPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-var userPicturesItem = document.querySelector('.pictures');
-
-
 // Находим необходимые блоки и записываем в них данные
 var renderUserPicture = function (picture) {
+  // Находим template для вывода данныых
+  var userPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var pictureElement = userPictureTemplate.cloneNode(true);
 
   pictureElement.querySelector('.picture__img').src = picture.url;
@@ -75,6 +76,8 @@ var renderUserPicture = function (picture) {
 
 // Отрисовываем шаблон на странице
 var renderUserPictures = function (pictures) {
+  // контейнер дл вывода картинок
+  var userPicturesItem = document.querySelector('.pictures');
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < pictures.length; i++) {
     fragment.appendChild(renderUserPicture(pictures[i]));
