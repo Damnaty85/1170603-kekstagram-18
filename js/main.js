@@ -53,19 +53,16 @@ var generateUserComments = function (comments) {
 
 // Функция создает объекты и записывает их в массив
 
-var generatePicturesObject = function (url, likes, comments, description) {
+var generatePicturesObject = function () {
   var pictureData = [];
 
   for (var i = 0; i < PHOTO_COUNT; i++) {
-    url = 'photos/' + (i + 1) + '.jpg';
-    likes = getRandomNumber(MIN_LIKES, MAX_LIKES);
-    comments = generateUserComments(COMMENTS);
-    description = getRandomElement(DESCRIPTIONS);
+    var url = 'photos/' + (i + 1) + '.jpg';
+    var likes = getRandomNumber(MIN_LIKES, MAX_LIKES);
+    var comments = generateUserComments(COMMENTS);
+    var description = getRandomElement(DESCRIPTIONS);
 
-    // добавляем значения в массив и объект
-
-    var PictureArray = {url: url, likes: likes, comments: comments, description: description};
-    pictureData.push(PictureArray);
+    pictureData.push({url, likes, comments, description});
   }
   return pictureData;
 };
