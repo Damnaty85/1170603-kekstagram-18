@@ -62,7 +62,10 @@ var generatePicturesObject = function () {
     var comments = generateUserComments(COMMENTS);
     var description = getRandomElement(DESCRIPTIONS);
 
-    pictureData.push({url, likes, comments, description});
+    // добавляем значения в массив и объект
+
+    var PictureArray = {url: url, likes: likes, comments: comments, description: description};
+    pictureData.push(PictureArray);
   }
   return pictureData;
 };
