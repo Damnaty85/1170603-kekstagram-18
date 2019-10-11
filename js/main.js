@@ -52,8 +52,8 @@ var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comm
 // функция удаления доп. класса для показа блока
 
 var removeClass = function (selectorName, classHidden) {
-  var bigPictureItem = document.querySelector(selectorName);
-  return bigPictureItem.classList.remove(classHidden);
+  var elementDeleteClass = document.querySelector(selectorName);
+  return elementDeleteClass.classList.remove(classHidden);
 };
 
 removeClass('.big-picture', 'hidden');
@@ -61,8 +61,8 @@ removeClass('.big-picture', 'hidden');
 // функция добавления доп. класса для удаления блока
 
 var addClass = function (selectorName, classHidden) {
-  var bigPictureItem = document.querySelector(selectorName);
-  return bigPictureItem.classList.add(classHidden);
+  var elementAddedClass = document.querySelector(selectorName);
+  return elementAddedClass.classList.add(classHidden);
 };
 
 // убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
