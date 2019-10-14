@@ -7,6 +7,8 @@ var MIN_LIKES = 15;
 var MAX_LIKES = 200;
 var MIN_COMMENT = 1;
 var MAX_COMMENT = 2;
+var MIN_AVATAR = 1;
+var MAX_AVATAR = 6;
 
 var COMMENTS = [
   'Всё отлично!',
@@ -25,6 +27,49 @@ var DESCRIPTIONS = [
   '*Добавить остроумную подпись*',
   'Да, еще одно фото'
 ];
+
+// Добавляем имена коментаторов
+
+var NAMES = [
+  'Даша',
+  'Никита',
+  'Антон',
+  'Борис',
+  'Ярис',
+  'Даня'
+];
+
+var bigPictureItem = document.querySelector('.big-picture');
+
+// находим контейнер для вывода комментариев
+
+var bigPictureCommentsList = bigPictureItem.querySelector('.social__comments');
+
+// находим имя шаблона которым будем манипулировать для вывода комментраиев
+
+var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comment');
+
+// функция удаления доп. класса для показа блока
+
+var removeClass = function (selector, classElement) {
+  var element = document.querySelector(selector);
+  return element.classList.remove(classElement);
+};
+
+removeClass('.big-picture', 'hidden');
+
+// функция добавления доп. класса для скрытия блока
+
+var hideElement = function (selector1, selector2, classElement) {
+  var element1 = document.querySelector(selector1);
+  element1.classList.add(classElement);
+  var element2 = document.querySelector(selector2);
+  element2.classList.add(classElement);
+};
+
+// убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
+
+hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
 
 // Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
 
@@ -103,3 +148,52 @@ var renderUserPictures = function (pictures) {
 
 var picturesData = generatePicturesObject();
 renderUserPictures(picturesData);
+
+// Вывод большой картинки module3-tsk3
+// функция очистки старых комментариев
+
+var clearBigPictureComments = function () {
+  var comments = bigPictureCommentsList.children;
+  for (var i = comments.length - 1; i >= 0; i--) {
+    comments[i].parentElement.removeChild(comments[i]);
+  }
+};
+
+// функция для записи в шаблон комментариев рандомных аватарок, имен и комментариев из массивов
+
+var renderBigPictureComment = function (comments) {
+  var commentElement = pictureCommentTemplate.cloneNode(true);
+
+  commentElement.querySelector('.social__picture').src = 'img/avatar-' + getRandomNumber(MIN_AVATAR, MAX_AVATAR) + '.svg';
+  commentElement.querySelector('.social__picture').alt = getRandomElement(NAMES);
+  commentElement.querySelector('.social__text').textContent = comments;
+
+  return commentElement;
+};
+
+var renderBigPictureComments = function (comments) {
+  clearBigPictureComments();
+
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < comments.length; i++) {
+    fragment.appendChild(renderBigPictureComment(comments[i]));
+  }
+
+  bigPictureCommentsList.appendChild(fragment);
+};
+
+// в функции находим блоки и записываем в них нужные данные для вывода в полноэкранном режиме
+
+var renderBigPictureItem = function (picture) {
+
+  bigPictureItem.querySelector('.big-picture__img').firstElementChild.src = picture.url;
+  bigPictureItem.querySelector('.likes-count').textContent = picture.likes;
+  bigPictureItem.querySelector('.comments-count').textContent = picture.comments.length;
+  bigPictureItem.querySelector('.social__caption').textContent = picture.description;
+
+  renderBigPictureComments(picture.comments);
+};
+
+// вызываем функцию рендеринга большого фото и рандомим фотографии в заданом промежутке из объекта
+
+renderBigPictureItem(picturesData[getRandomNumber(0, PHOTO_COUNT)]);
