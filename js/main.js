@@ -51,24 +51,25 @@ var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comm
 
 // функция удаления доп. класса для показа блока
 
-var removeClass = function (selectorName, classHidden) {
-  var elementDeleteClass = document.querySelector(selectorName);
-  return elementDeleteClass.classList.remove(classHidden);
+var showElement = function (element, param) {
+  var elementMain = document.querySelector(element);
+  return elementMain.classList.remove(param);
 };
 
-removeClass('.big-picture', 'hidden');
+showElement('.big-picture', 'hidden');
 
-// функция добавления доп. класса для удаления блока
+// функция добавления доп. класса для скрытия блока
 
-var addClass = function (selectorName, classHidden) {
-  var elementAddedClass = document.querySelector(selectorName);
-  return elementAddedClass.classList.add(classHidden);
+var hideElement = function (element1, element2, param) {
+  var elementMain1 = document.querySelector(element1);
+  elementMain1.classList.add(param);
+  var elementMain2 = document.querySelector(element2);
+  elementMain2.classList.add(param);
 };
 
 // убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
 
-addClass('.social__comment-count', 'visually-hidden');
-addClass('.comments-loader', 'visually-hidden');
+hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
 
 // Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
 
