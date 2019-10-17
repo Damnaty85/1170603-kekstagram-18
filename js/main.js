@@ -53,14 +53,14 @@ var bigPictureCommentsList = bigPictureItem.querySelector('.social__comments');
 
 var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comment');
 
-// функция удаления доп. класса для показа блока
+// функция удаления доп. класса для показа блока - временный коммент
 
-var removeClass = function (selector, classElement) {
-  var selectorMain = document.querySelector(selector);
-  return selectorMain.classList.remove(classElement);
-};
+// var removeClass = function (selector, classElement) {
+//   var selectorMain = document.querySelector(selector);
+//   return selectorMain.classList.remove(classElement);
+// };
 
-// временно исключаем из показа большое изображение
+// временно исключаем из показа большое изображение - временный коммент
 
 // removeClass('.big-picture', 'hidden');
 
@@ -204,8 +204,7 @@ var renderBigPictureItem = function (picture) {
 
 renderBigPictureItem(picturesData[getRandomNumber(0, PHOTO_COUNT)]);
 
-
-//////////////////////////// module4-task2/////////////////////////////////////////////////////////////////////////////
+// module4-task2
 
 var uploadFilePicture = document.querySelector('#upload-file');
 var imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -328,7 +327,7 @@ var changeEffectsPreview = function (evt) {
 
   // прячем ползунок если не выбран никакой эффект и условия добавления стиля и класса выбранного эффекта
 
-  switch(evt.target.value) {
+  switch (evt.target.value) {
     case 'none': imgUploadPreview.style.filter = '';
       addHidden(effectLevel);
       break;
@@ -358,7 +357,7 @@ effectsRadio.forEach(function (item) {
 //  Перемещение ползунка и изминение интенсивности
 
 var effectLevelValue = effectLevel.querySelector('.effect-level__value');
-var effectLevelLine = effectLevel.querySelector('.effect-level__line');
+// var effectLevelLine = effectLevel.querySelector('.effect-level__line');
 var effectLevelPin = effectLevel.querySelector('.effect-level__pin');
 var effectLevelDepth = effectLevel.querySelector('.effect-level__depth');
 
@@ -411,7 +410,7 @@ scaleControlPlus.addEventListener('click', function () {
 var hashtagUploadFile = document.querySelector('.text__hashtags');
 var descriptionUploadFile = document.querySelector('.text__description');
 
-var checkSimilarHashtags = function(hashtags) {
+var checkSimilarHashtags = function (hashtags) {
   for (var i = 0; i < hashtags.length; i++) {
     var currentHashtag = hashtags[i];
     for (var j = 0; j < hashtags.length; j++) {
@@ -423,8 +422,7 @@ var checkSimilarHashtags = function(hashtags) {
   return false;
 };
 
-var hashtagValidation = function() {
-  hashtagUploadFile.style.outline = '';
+var hashtagValidation = function () {
   var errorMessage = '';
   var hashtagValue = hashtagUploadFile.value.trim();
 
