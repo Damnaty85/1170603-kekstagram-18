@@ -320,9 +320,7 @@ var changeEffectsPreview = function (evt) {
 
     // находим общее у всех классов и будем добавляеть слово в зависимости от приминяемого эффекта
 
-    imgUploadPreview.classList.add(
-      'effects__preview--' + evt.target.value
-    );
+    imgUploadPreview.classList.add('effects__preview--' + evt.target.value);
   }
 
   // прячем ползунок если не выбран никакой эффект и условия добавления стиля и класса выбранного эффекта
