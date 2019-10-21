@@ -331,8 +331,6 @@ uploadFilePicture.addEventListener('change', function () {
   openPictureUpload();
 });
 
-// все для блока эффектов
-
 var pictureUploadPreview = pictureUploadOverlay.querySelector('.img-upload__preview');
 var effectLevel = pictureUploadOverlay.querySelector('.effect-level');
 var effectsRadio = pictureUploadOverlay.querySelectorAll('.effects__radio');
