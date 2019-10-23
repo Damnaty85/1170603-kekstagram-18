@@ -83,8 +83,8 @@
   });
 
   window.preview = {
-    openBigPicture,
-    closeBigPicture,
-    renderBigPictureItem
-  };
+    openBigPicture: openBigPicture,
+    closeBigPicture: closeBigPicture,
+    renderBigPictureItem: renderBigPictureItem
+  }
 })();

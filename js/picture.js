@@ -77,7 +77,7 @@
   renderUserPictures(picturesData);
 
   window.picture = {
-    picturesData,
-    generatePicturesObject
-  };
+    picturesData: picturesData,
+    generatePicturesObject: generatePicturesObject
+  }
 })();

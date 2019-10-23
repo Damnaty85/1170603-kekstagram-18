@@ -195,7 +195,7 @@
   });
 
   window.form = {
-    onPictureUploadEscPress
-  };
+    onPictureUploadEscPress: onPictureUploadEscPress
+  }
 })();
 

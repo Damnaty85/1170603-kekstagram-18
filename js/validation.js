@@ -72,8 +72,7 @@
   hashtagUploadFile.addEventListener('input', hashtagValidation);
 
   window.validation = {
-    descriptionUploadFile,
-    hashtagUploadFile
-  };
-
+    descriptionUploadFile: descriptionUploadFile,
+    hashtagUploadFile: hashtagUploadFile
+  }
 })();

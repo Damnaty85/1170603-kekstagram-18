@@ -80,24 +80,24 @@
   };
 
   window.data = {
-    PHOTO_COUNT,
-    ESC_KEYCODE,
-    MIN_AVATAR,
-    MAX_AVATAR,
-    NAMES,
-    COMMENTS,
-    DESCRIPTIONS,
-    SCALE_STEP,
-    MIN_SCALE,
-    MAX_SCALE,
-    MIN_LIKES,
-    MAX_LIKES,
-    MIN_COMMENT,
-    MAX_COMMENT,
-    addHidden,
-    removeHidden,
-    getRandomNumber,
-    getRandomElement,
-    hideElement
-  };
+    PHOTO_COUNT: PHOTO_COUNT,
+    ESC_KEYCODE: ESC_KEYCODE,
+    MIN_AVATAR: MIN_AVATAR,
+    MAX_AVATAR: MAX_AVATAR,
+    NAMES: NAMES,
+    COMMENTS: COMMENTS,
+    DESCRIPTIONS: DESCRIPTIONS,
+    SCALE_STEP: SCALE_STEP,
+    MIN_SCALE: MIN_SCALE,
+    MAX_SCALE: MAX_SCALE,
+    MIN_LIKES: MIN_LIKES,
+    MAX_LIKES: MAX_LIKES,
+    MIN_COMMENT: MIN_COMMENT,
+    MAX_COMMENT: MAX_COMMENT,
+    addHidden: addHidden,
+    removeHidden: removeHidden,
+    getRandomNumber: getRandomNumber,
+    getRandomElement: getRandomElement,
+    hideElement: hideElement
+  }
 })();
