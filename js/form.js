@@ -196,6 +196,6 @@
 
   window.form = {
     onPictureUploadEscPress
-  }
+  };
 })();
 

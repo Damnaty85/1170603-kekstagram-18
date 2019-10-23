@@ -79,7 +79,6 @@
     selectorMain2.classList.add(classElement);
   };
 
-
   window.data = {
     PHOTO_COUNT,
     ESC_KEYCODE,
@@ -101,5 +100,4 @@
     getRandomElement,
     hideElement
   };
-
 })();
