@@ -1,13 +1,12 @@
 'use strict';
 
 (function () {
-  // module4-task2
 
   var uploadFilePicture = document.querySelector('#upload-file');
   var pictureUploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadCancel = pictureUploadOverlay.querySelector('#upload-cancel');
 
-// Сбрасываем все стили ползунка и масштаба до первоначального состояния
+  // Сбрасываем все стили ползунка и масштаба до первоначального состояния
 
   var resetAllStyleEffect = function () {
     pictureUploadPreview.style.transform = 'scale(1)';
@@ -17,7 +16,7 @@
     effectLevelDepth.style.width = '100%';
   };
 
-// сбрасываем класс фильтр и значение загружаемой картинки
+  // сбрасываем класс фильтр и значение загружаемой картинки
 
   var resetLoadedPicture = function () {
     uploadFilePicture.value = '';
@@ -25,7 +24,7 @@
     pictureUploadPreview.style.filter = '';
   };
 
-// Функции и события открытия и закрытия окна загрузки и редактирования
+  // Функции и события открытия и закрытия окна загрузки и редактирования
 
   var onPictureUploadEscPress = function (evt) {
     if (evt.keyCode === window.data.ESC_KEYCODE) {
@@ -36,14 +35,14 @@
     }
   };
 
-// функция сброса полей хэштег и описания (удаление текста из полей)
+  // функция сброса полей хэштег и описания (удаление текста из полей)
 
   var inputResetUpload = function () {
     window.validation.hashtagUploadFile.value = '';
     window.validation.descriptionUploadFile.value = '';
   };
 
-// именованная функция закрытия окна загрузки и редактирования файлов
+  // именованная функция закрытия окна загрузки и редактирования файлов
 
   var closePictureUpload = function () {
     window.data.addHidden(pictureUploadOverlay);
@@ -54,7 +53,7 @@
     document.removeEventListener('keydown', onPictureUploadEscPress);
   };
 
-// именованная функция открытия окна загрузки и редактирования файлов
+  // именованная функция открытия окна загрузки и редактирования файлов
 
   var openPictureUpload = function () {
     window.data.removeHidden(pictureUploadOverlay);
@@ -98,7 +97,7 @@
   var effectLevel = pictureUploadOverlay.querySelector('.effect-level');
   var effectsRadio = pictureUploadOverlay.querySelectorAll('.effects__radio');
 
-// Функция добаления класса в соответствие с выбраным эффектом
+  // Функция добаления класса в соответствие с выбраным эффектом
 
   var changeEffectsPreview = function (evt) {
 
@@ -135,7 +134,7 @@
     }
   };
 
-// обработчик события клика по эффектам со сбросом стилей
+  // обработчик события клика по эффектам со сбросом стилей
 
   effectsRadio.forEach(function (item) {
     item.addEventListener('change', function (evt) {
@@ -145,14 +144,14 @@
     });
   });
 
-//  Перемещение ползунка и изминение интенсивности
+  //  Перемещение ползунка и изминение интенсивности
 
   var effectLevelValue = effectLevel.querySelector('.effect-level__value');
-// var effectLevelLine = effectLevel.querySelector('.effect-level__line');
+  // var effectLevelLine = effectLevel.querySelector('.effect-level__line');
   var effectLevelPin = effectLevel.querySelector('.effect-level__pin');
   var effectLevelDepth = effectLevel.querySelector('.effect-level__depth');
 
-// Редактирование размера изображения
+  // Редактирование размера изображения
 
   var scaleControlValue = pictureUploadOverlay.querySelector('.scale__control--value');
   var scaleControlMinus = pictureUploadOverlay.querySelector('.scale__control--smaller');
@@ -169,7 +168,7 @@
     pictureUploadPreview.style.transform = 'scale(' + scaleSmaller / 100 + ')';
   };
 
-// Функция увеличения изображенияи и изминение стиля
+  // Функция увеличения изображенияи и изминение стиля
 
   var zoomIn = function () {
     var scaleBigger = parseInt(scaleControlValue.value, 10) + window.data.SCALE_STEP;
@@ -182,13 +181,13 @@
     pictureUploadPreview.style.transform = 'scale(' + scaleBigger / 100 + ')';
   };
 
-// Обработчик уменьшения изображения по клику на "-"
+  // Обработчик уменьшения изображения по клику на "-"
 
   scaleControlMinus.addEventListener('click', function () {
     zoomOut();
   });
 
-// Обработчик увеличения изображения по клику на "+"
+  // Обработчик увеличения изображения по клику на "+"
 
   scaleControlPlus.addEventListener('click', function () {
     zoomIn();
@@ -196,6 +195,6 @@
 
   window.form = {
     onPictureUploadEscPress: onPictureUploadEscPress
-  }
+  };
 })();
 

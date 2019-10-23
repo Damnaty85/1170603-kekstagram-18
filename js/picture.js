@@ -58,7 +58,7 @@
     return pictureElement;
   };
 
-// Отрисовываем шаблон на странице
+  // Отрисовываем шаблон на странице
 
   var renderUserPictures = function (pictures) {
 
@@ -79,5 +79,5 @@
   window.picture = {
     picturesData: picturesData,
     generatePicturesObject: generatePicturesObject
-  }
+  };
 })();

@@ -2,7 +2,7 @@
 
 (function () {
 
-// Валидация хэштегов и описания для фото
+  // Валидация хэштегов и описания для фото
 
   var hashtagUploadFile = document.querySelector('.text__hashtags');
   var descriptionUploadFile = document.querySelector('.text__description');
@@ -47,7 +47,7 @@
     hashtagUploadFile.setCustomValidity(errorMessage);
   };
 
-// валидация описания к новой картинке
+  // валидация описания к новой картинке
 
   function descriptionValidity() {
     var errorMessage = '';
@@ -74,5 +74,5 @@
   window.validation = {
     descriptionUploadFile: descriptionUploadFile,
     hashtagUploadFile: hashtagUploadFile
-  }
+  };
 })();

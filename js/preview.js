@@ -11,7 +11,7 @@
     }
   };
 
-// функция для записи в шаблон комментариев рандомных аватарок, имен и комментариев из массивов
+  // функция для записи в шаблон комментариев рандомных аватарок, имен и комментариев из массивов
 
   var renderBigPictureComment = function (comments) {
     var commentElement = pictureCommentTemplate.cloneNode(true);
@@ -38,26 +38,25 @@
   var bigPictureCommentsList = bigPictureItem.querySelector('.social__comments');
   var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comment');
 
-
-// убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
+  // убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
 
   window.data.hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
 
-// функция которая открывает большую фотографию
+  // функция которая открывает большую фотографию
 
   var openBigPicture = function () {
     window.data.removeHidden(bigPictureItem);
     document.addEventListener('keydown', window.form.onPictureUploadEscPress);
   };
 
-// функция которая закрывает большую фотографию
+  // функция которая закрывает большую фотографию
 
   var closeBigPicture = function () {
     window.data.addHidden(bigPictureItem);
     document.removeEventListener('keydown', window.form.onPictureUploadEscPress);
   };
 
-// в функции находим блоки и записываем в них нужные данные для вывода в полноэкранном режиме
+  // в функции находим блоки и записываем в них нужные данные для вывода в полноэкранном режиме
 
   var renderBigPictureItem = function (picture) {
 
@@ -69,11 +68,11 @@
     renderBigPictureComments(picture.comments);
   };
 
-// вызываем функцию рендеринга большого фото и рандомим фотографии в заданом промежутке из объекта
+  // вызываем функцию рендеринга большого фото и рандомим фотографии в заданом промежутке из объекта
 
   renderBigPictureItem(window.picture.picturesData[window.data.getRandomNumber(0, window.data.PHOTO_COUNT)]);
 
-// закрываем большую фотографию
+  // закрываем большую фотографию
 
   var buttonClose = bigPictureItem.querySelector('.big-picture__cancel');
   buttonClose.tabIndex = 0;
@@ -86,5 +85,5 @@
     openBigPicture: openBigPicture,
     closeBigPicture: closeBigPicture,
     renderBigPictureItem: renderBigPictureItem
-  }
+  };
 })();

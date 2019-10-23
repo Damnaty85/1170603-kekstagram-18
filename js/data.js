@@ -2,7 +2,7 @@
 
 (function () {
 
-// Записываем данные в переменные
+  // Записываем данные в переменные
 
   var PHOTO_COUNT = 25;
   var MIN_LIKES = 15;
@@ -34,7 +34,7 @@
     'Да, еще одно фото'
   ];
 
-// Добавляем имена коментаторов
+  // Добавляем имена коментаторов
 
   var NAMES = [
     'Даша',
@@ -45,30 +45,29 @@
     'Даня'
   ];
 
-// добавление класса hidden к селектору
+  // добавление класса hidden к селектору
 
   var addHidden = function (selector) {
     selector.classList.add('hidden');
   };
 
-// удаление класса hidden у селектора
+  // удаление класса hidden у селектора
 
   var removeHidden = function (selector) {
     selector.classList.remove('hidden');
   };
 
-// Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
+  // Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
 
   var getRandomNumber = function (min, max) {
     return Math.round((Math.random() * (max - min)) + min);
   };
 
-//  Обращается к случайному элементу в массиве, генерируя случайное число с плавающей точкой от нуля до длины массива и округляя его до ближайшего целого числа
+  //  Обращается к случайному элементу в массиве, генерируя случайное число с плавающей точкой от нуля до длины массива и округляя его до ближайшего целого числа
 
   var getRandomElement = function (array) {
     return array[Math.floor(Math.random() * array.length)];
   };
-
 
   // функция добавления доп. класса для скрытия блока visually-hidden
 
@@ -99,5 +98,5 @@
     getRandomNumber: getRandomNumber,
     getRandomElement: getRandomElement,
     hideElement: hideElement
-  }
+  };
 })();
