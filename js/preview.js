@@ -2,6 +2,16 @@
 
 (function () {
 
+  var bigPictureItem = document.querySelector('.big-picture');
+  var bigPictureCommentsList = bigPictureItem.querySelector('.social__comments');
+  var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comment');
+  var buttonClose = bigPictureItem.querySelector('.big-picture__cancel');
+  buttonClose.tabIndex = 0;
+
+  // убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
+
+  window.data.hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
+
   // функция очистки старых комментариев
 
   var clearBigPictureComments = function () {
@@ -11,36 +21,28 @@
     }
   };
 
-  // функция для записи в шаблон комментариев рандомных аватарок, имен и комментариев из массивов
-
   var renderBigPictureComment = function (comments) {
     var commentElement = pictureCommentTemplate.cloneNode(true);
 
-    commentElement.querySelector('.social__picture').src = 'img/avatar-' + window.data.getRandomNumber(window.data.MIN_AVATAR, window.data.MAX_AVATAR) + '.svg';
-    commentElement.querySelector('.social__picture').alt = window.data.getRandomElement(window.data.NAMES);
-    commentElement.querySelector('.social__text').textContent = comments;
+    commentElement.querySelector('.social__picture').src = comments.avatar;
+    commentElement.querySelector('.social__picture').alt = comments.name;
+    commentElement.querySelector('.social__text').textContent = comments.message;
 
     return commentElement;
   };
+
+  // функция для вывода максимального количества комментариев, пока два
 
   var renderBigPictureComments = function (comments) {
     clearBigPictureComments();
 
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < comments.length; i++) {
+    for (var i = 0; i < window.data.MAX_COMMENT; i++) {
       fragment.appendChild(renderBigPictureComment(comments[i]));
     }
 
     bigPictureCommentsList.appendChild(fragment);
   };
-
-  var bigPictureItem = document.querySelector('.big-picture');
-  var bigPictureCommentsList = bigPictureItem.querySelector('.social__comments');
-  var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comment');
-
-  // убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
-
-  window.data.hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
 
   // функция которая открывает большую фотографию
 
@@ -68,14 +70,7 @@
     renderBigPictureComments(picture.comments);
   };
 
-  // вызываем функцию рендеринга большого фото и рандомим фотографии в заданом промежутке из объекта
-
-  renderBigPictureItem(window.picture.picturesData[window.data.getRandomNumber(0, window.data.PHOTO_COUNT)]);
-
   // закрываем большую фотографию
-
-  var buttonClose = bigPictureItem.querySelector('.big-picture__cancel');
-  buttonClose.tabIndex = 0;
 
   buttonClose.addEventListener('click', function () {
     closeBigPicture();
