@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-
+  var uploadFormPicture = document.querySelector('#upload-select-image');
   var uploadFilePicture = document.querySelector('#upload-file');
   var pictureUploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadCancel = pictureUploadOverlay.querySelector('#upload-cancel');
@@ -19,7 +19,7 @@
   // сбрасываем класс фильтр и значение загружаемой картинки
 
   var resetLoadedPicture = function () {
-    uploadFilePicture.value = '';
+    uploadFormPicture.reset();
     pictureUploadPreview.className = 'img-upload__preview';
     pictureUploadPreview.style.filter = '';
   };
@@ -147,7 +147,7 @@
   //  Перемещение ползунка и изминение интенсивности
 
   var effectLevelValue = effectLevel.querySelector('.effect-level__value');
-  // var effectLevelLine = effectLevel.querySelector('.effect-level__line');
+  var effectLevelLine = effectLevel.querySelector('.effect-level__line');
   var effectLevelPin = effectLevel.querySelector('.effect-level__pin');
   var effectLevelDepth = effectLevel.querySelector('.effect-level__depth');
 
@@ -192,6 +192,69 @@
   scaleControlPlus.addEventListener('click', function () {
     zoomIn();
   });
+
+  // функция определяет класс в массиве и в соответствие с этим использует правильный стиль фильтра и расчет
+
+  var changeEffectValue = function () {
+
+    // перевод координат из абсолютных значений в относительные
+
+    effectLevelValue.value = effectLevelPin.offsetLeft / effectLevelLine.clientWidth * 100;
+
+    // проверяем второй элемент в масиве классов на соответсвие и назначаем соответствующий css фильтр
+
+    switch (pictureUploadPreview.classList[1]) {
+      case 'effects__preview--chrome': pictureUploadPreview.style.filter = 'grayscale(' + effectLevelValue.value / 100 + ')';
+        break;
+      case 'effects__preview--sepia': pictureUploadPreview.style.filter = 'sepia(' + effectLevelValue.value / 100 + ')';
+        break;
+      case 'effects__preview--marvin': pictureUploadPreview.style.filter = 'invert(' + effectLevelValue.value + '%)';
+        break;
+      case 'effects__preview--phobos': pictureUploadPreview.style.filter = 'blur(' + (effectLevelValue.value / 100) * 3 + 'px)';
+        break;
+      case 'effects__preview--heat': pictureUploadPreview.style.filter = 'brightness(' + (effectLevelValue.value / 100) * 3 + ')';
+        break;
+    }
+  };
+
+  // Перетаскивание слайдера эффектов
+
+  effectLevelPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoordsX = evt.clientX;
+
+    var onMouseMove = function (moveEvt) {
+
+      var moveX = startCoordsX - moveEvt.clientX;
+      startCoordsX = moveEvt.clientX;
+
+      var pinElementLeft = effectLevelPin.offsetLeft - moveX;
+
+      var lineElementLeft = effectLevelLine.getBoundingClientRect().left;
+      var lineElementRight = effectLevelLine.getBoundingClientRect().right;
+
+      if (startCoordsX <= lineElementLeft) {
+        pinElementLeft = 0;
+      } else if (startCoordsX >= lineElementRight) {
+        pinElementLeft = effectLevelLine.clientWidth;
+      }
+
+      effectLevelPin.style.left = pinElementLeft + 'px';
+      effectLevelDepth.style.width = pinElementLeft + 'px';
+    };
+
+    var onMouseUp = function () {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', changeEffectValue);
+
+    document.addEventListener('mouseup', onMouseUp);
+  });
+
 
   window.form = {
     onPictureUploadEscPress: onPictureUploadEscPress
