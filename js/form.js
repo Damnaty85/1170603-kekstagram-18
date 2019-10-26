@@ -203,7 +203,7 @@
 
     // проверяем второй элемент в масиве классов на соответсвие и назначаем соответствующий css фильтр
 
-    switch(pictureUploadPreview.classList[1]) {
+    switch (pictureUploadPreview.classList[1]) {
       case 'effects__preview--chrome': pictureUploadPreview.style.filter = 'grayscale(' + effectLevelValue.value / 100 + ')';
         break;
       case 'effects__preview--sepia': pictureUploadPreview.style.filter = 'sepia(' + effectLevelValue.value / 100 + ')';
