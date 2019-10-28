@@ -43,9 +43,7 @@
 
   var closeDialog = function (dialogSelector) {
     var dialogElement = mainElement.querySelector('.' + dialogSelector);
-    var dialogButtonElements = dialogElement.querySelectorAll(
-      '.' + dialogSelector + '__button'
-    );
+    var dialogButtonElements = dialogElement.querySelectorAll('.' + dialogSelector + '__button');
 
     // Скрывает (удаляет) диалоговое окно непосредственно, удаляет обработчик ESC
     var dialogElementRemove = function () {
