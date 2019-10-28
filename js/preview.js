@@ -10,7 +10,7 @@
 
   // убираем из показа счетсик комментариев и показ новых комментариев по ТЗ
 
-  window.hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
+  window.data.hideElement('.social__comment-count', '.comments-loader', 'visually-hidden');
 
   // функция очистки старых комментариев
 
@@ -37,7 +37,7 @@
     clearBigPictureComments();
 
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < window.MAX_COMMENT; i++) {
+    for (var i = 0; i < window.data.MAX_COMMENT; i++) {
       fragment.appendChild(renderBigPictureComment(comments[i]));
     }
 
@@ -46,21 +46,21 @@
 
   // функция которая открывает большую фотографию
 
-  window.openBigPicture = function () {
-    window.removeHidden(bigPictureItem);
-    document.addEventListener('keydown', window.onPressEscKey);
+  var openBigPicture = function () {
+    window.data.removeHidden(bigPictureItem);
+    document.addEventListener('keydown', window.form.onPressEscKey);
   };
 
   // функция которая закрывает большую фотографию
 
-  window.closeBigPicture = function () {
-    window.addHidden(bigPictureItem);
-    document.removeEventListener('keydown', window.onPressEscKey);
+  var closeBigPicture = function () {
+    window.data.addHidden(bigPictureItem);
+    document.removeEventListener('keydown', window.form.onPressEscKey);
   };
 
   // в функции находим блоки и записываем в них нужные данные для вывода в полноэкранном режиме
 
-  window.renderBigPictureItem = function (picture) {
+  var renderBigPictureItem = function (picture) {
 
     bigPictureItem.querySelector('.big-picture__img').firstElementChild.src = picture.url;
     bigPictureItem.querySelector('.likes-count').textContent = picture.likes;
@@ -73,7 +73,12 @@
   // закрываем большую фотографию
 
   buttonClose.addEventListener('click', function () {
-    window.closeBigPicture();
+    closeBigPicture();
   });
 
+  window.preview = {
+    openBigPicture: openBigPicture,
+    closeBigPicture: closeBigPicture,
+    renderBigPictureItem: renderBigPictureItem
+  };
 })();

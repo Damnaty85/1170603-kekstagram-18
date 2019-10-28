@@ -22,8 +22,8 @@
     // открытие маленькое картинки
 
     pictureElement.addEventListener('click', function () {
-      window.openBigPicture();
-      window.renderBigPictureItem(picture);
+      window.preview.openBigPicture();
+      window.preview.renderBigPictureItem(picture);
     });
 
     return pictureElement;

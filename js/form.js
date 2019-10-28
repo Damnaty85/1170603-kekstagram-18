@@ -55,7 +55,7 @@
 
     // Обработчик клавиши ESC
     var onElementEscPress = function (evt) {
-      if (evt.keyCode === window.ESC_KEYCODE) {
+      if (evt.keyCode === window.data.ESC_KEYCODE) {
         dialogElementRemove();
       }
     };
@@ -107,15 +107,26 @@
 
   // сбрасываем класс фильтр и значение загружаемой картинки
 
-  window.resetLoadedPicture = function () {
+  var resetLoadedPicture = function () {
     uploadFormPicture.reset();
     pictureUploadPreview.className = 'img-upload__preview';
     pictureUploadPreview.style.filter = '';
   };
 
+  // Функции и события открытия и закрытия окна загрузки и редактирования
+
+  var onPressEscKey = function (evt) {
+    if (evt.keyCode === window.data.ESC_KEYCODE) {
+      window.data.addHidden(pictureUploadOverlay);
+      resetLoadedPicture();
+      inputResetUpload();
+      window.preview.closeBigPicture();
+    }
+  };
+
   // функция сброса полей хэштег и описания (удаление текста из полей)
 
-  window.inputResetUpload = function () {
+  var inputResetUpload = function () {
     window.validation.hashtagUploadFile.value = '';
     window.validation.descriptionUploadFile.value = '';
   };
@@ -123,23 +134,23 @@
   // именованная функция закрытия окна загрузки и редактирования файлов
 
   var closePictureUpload = function () {
-    window.addHidden(pictureUploadOverlay);
+    window.data.addHidden(pictureUploadOverlay);
 
     // сброс стиля эффектов и удаление класса эффекта при закрытии
 
     resetLoadedPicture();
-    document.removeEventListener('keydown', window.onPressEscKey);
+    document.removeEventListener('keydown', onPressEscKey);
   };
 
   // именованная функция открытия окна загрузки и редактирования файлов
 
   var openPictureUpload = function () {
-    window.removeHidden(pictureUploadOverlay);
-    document.addEventListener('keydown', window.onPressEscKey);
+    window.data.removeHidden(pictureUploadOverlay);
+    document.addEventListener('keydown', onPressEscKey);
 
     // прячем ползунок при загрузке новой картинки
 
-    window.addHidden(effectLevel);
+    window.data.addHidden(effectLevel);
     resetAllStyleEffect();
 
     uploadCancel.addEventListener('click', function () {
@@ -149,21 +160,21 @@
     // устанавливаем и снимаем фокус с поля описания для события запрета закрытия окна загрузки файла
 
     window.validation.descriptionUploadFile.addEventListener('focus', function () {
-      document.removeEventListener('keydown', window.onPressEscKey);
+      document.removeEventListener('keydown', onPressEscKey);
     });
 
     window.validation.descriptionUploadFile.addEventListener('blur', function () {
-      document.addEventListener('keydown', window.onPressEscKey);
+      document.addEventListener('keydown', onPressEscKey);
     });
 
     // устанавливаем и снимаем фокус с поля хэштегов для события запрета закрытия окна загрузки файла
 
     window.validation.hashtagUploadFile.addEventListener('focus', function () {
-      document.removeEventListener('keydown', window.onPressEscKey);
+      document.removeEventListener('keydown', onPressEscKey);
     });
 
     window.validation.hashtagUploadFile.addEventListener('blur', function () {
-      document.addEventListener('keydown', window.onPressEscKey);
+      document.addEventListener('keydown', onPressEscKey);
     });
   };
 
@@ -186,7 +197,7 @@
     // условие добавления класса
 
     if (evt.target.value !== 'none') {
-      window.removeHidden(effectLevel);
+      window.data.removeHidden(effectLevel);
 
       // находим общее у всех классов и будем добавляеть слово в зависимости от приминяемого эффекта
 
@@ -197,7 +208,7 @@
 
     switch (evt.target.value) {
       case 'none': pictureUploadPreview.style.filter = '';
-        window.addHidden(effectLevel);
+        window.data.addHidden(effectLevel);
         break;
       case 'chrome': pictureUploadPreview.style.filter = 'grayscale(1)';
         break;
@@ -236,10 +247,10 @@
   var scaleControlPlus = pictureUploadOverlay.querySelector('.scale__control--bigger');
 
   var zoomOut = function () {
-    var scaleSmaller = parseInt(scaleControlValue.value, 10) - window.SCALE_STEP;
+    var scaleSmaller = parseInt(scaleControlValue.value, 10) - window.data.SCALE_STEP;
 
-    if (scaleSmaller <= window.MIN_SCALE) {
-      scaleSmaller = window.MIN_SCALE;
+    if (scaleSmaller <= window.data.MIN_SCALE) {
+      scaleSmaller = window.data.MIN_SCALE;
     }
     scaleControlValue.value = scaleSmaller + '%';
 
@@ -249,10 +260,10 @@
   // Функция увеличения изображенияи и изминение стиля
 
   var zoomIn = function () {
-    var scaleBigger = parseInt(scaleControlValue.value, 10) + window.SCALE_STEP;
+    var scaleBigger = parseInt(scaleControlValue.value, 10) + window.data.SCALE_STEP;
 
-    if (scaleBigger >= window.MAX_SCALE) {
-      scaleBigger = window.MAX_SCALE;
+    if (scaleBigger >= window.data.MAX_SCALE) {
+      scaleBigger = window.data.MAX_SCALE;
     }
     scaleControlValue.value = scaleBigger + '%';
 
@@ -340,7 +351,7 @@
   });
 
   window.form = {
-    pictureUploadOverlay: pictureUploadOverlay
+    onPressEscKey: onPressEscKey
   };
 })();
 
