@@ -41,5 +41,5 @@
     userPicturesItem.appendChild(fragment);
   };
 
-  window.load.loadData(window.load.URL_DATA, renderUserPictures);
+  window.load.loadData(window.load.URL_LOAD, renderUserPictures);
 })();

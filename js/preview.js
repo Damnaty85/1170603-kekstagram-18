@@ -48,14 +48,14 @@
 
   var openBigPicture = function () {
     window.data.removeHidden(bigPictureItem);
-    document.addEventListener('keydown', window.form.onPictureUploadEscPress);
+    document.addEventListener('keydown', window.form.onPressEscKey);
   };
 
   // функция которая закрывает большую фотографию
 
   var closeBigPicture = function () {
     window.data.addHidden(bigPictureItem);
-    document.removeEventListener('keydown', window.form.onPictureUploadEscPress);
+    document.removeEventListener('keydown', window.form.onPressEscKey);
   };
 
   // в функции находим блоки и записываем в них нужные данные для вывода в полноэкранном режиме
