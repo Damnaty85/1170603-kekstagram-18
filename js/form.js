@@ -1,10 +1,99 @@
 'use strict';
 
 (function () {
-  var uploadFormPicture = document.querySelector('#upload-select-image');
-  var uploadFilePicture = document.querySelector('#upload-file');
+  // загрузка на сервер начало
+
+  var URL_UPLOAD = 'https://js.dump.academy/kekstagram';
+  var mainElement = document.querySelector('main');
+
+  var uploadFormPicture = document.getElementById('upload-select-image');
+  var uploadFilePicture = document.getElementById('upload-file');
   var pictureUploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadCancel = pictureUploadOverlay.querySelector('#upload-cancel');
+
+  // Отправляет форму и проверяет ответ сервера
+  var upload = function (data, onSuccess) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+
+    xhr.addEventListener('load', function () {
+      if (xhr.status === 200) {
+        onSuccess();
+      } else {
+        onError();
+      }
+    });
+
+    xhr.addEventListener('error', function () {
+      onError('Произошла ошибка соединения');
+    });
+    xhr.open('POST', URL_UPLOAD);
+    xhr.send(data);
+  };
+
+  // Создает диалоговое окно из шаблонов и вставляет в документ (показывает)
+  var openDialog = function (dialogSelector) {
+    var successTemplate = document
+      .querySelector('#' + dialogSelector)
+      .content.querySelector('.' + dialogSelector);
+    var successTemplateClone = successTemplate.cloneNode(true);
+
+    mainElement.appendChild(successTemplateClone);
+  };
+
+  var closeDialog = function (dialogSelector) {
+    var dialogElement = mainElement.querySelector('.' + dialogSelector);
+    var dialogButtonElements = dialogElement.querySelectorAll(
+      '.' + dialogSelector + '__button'
+    );
+
+    // Скрывает (удаляет) диалоговое окно непосредственно, удаляет обработчик ESC
+    var dialogElementRemove = function () {
+      dialogElement.remove();
+      document.removeEventListener('keydown', onElementEscPress);
+    };
+
+    // Обработчик клавиши ESC
+    var onElementEscPress = function (evt) {
+      if (evt.keyCode === window.ESC_KEYCODE) {
+        dialogElementRemove();
+      }
+    };
+
+    // Проверяет если щелчек не по диалговому окну то закрывает его
+    var dialogRemove = function (evt) {
+      if (!evt.target.closest('.' + dialogSelector + '__inner')) {
+        dialogElementRemove();
+      }
+    };
+
+    // Закрывает нажатием на ESC
+    document.addEventListener('keydown', onElementEscPress);
+    // Закрывает по клику на произвольную область экрана
+    dialogElement.addEventListener('click', dialogRemove);
+    // Закрывает по клику на buttons
+    dialogButtonElements.forEach(function (item) {
+      item.addEventListener('click', dialogElementRemove);
+    });
+  };
+
+  // Действия при успешной отправке на сервер
+  var onSucces = function () {
+    closePictureUpload();
+    uploadFormPicture.reset();
+    openDialog('success');
+    closeDialog('success');
+  };
+
+  // Действия при ошибке при отправке на сервер
+  var onError = function () {
+    closePictureUpload();
+    uploadFormPicture.reset();
+    openDialog('error');
+    closeDialog('error');
+  };
+
+  // загрузка на сервер конец
 
   // Сбрасываем все стили ползунка и масштаба до первоначального состояния
 
@@ -18,26 +107,15 @@
 
   // сбрасываем класс фильтр и значение загружаемой картинки
 
-  var resetLoadedPicture = function () {
+  window.resetLoadedPicture = function () {
     uploadFormPicture.reset();
     pictureUploadPreview.className = 'img-upload__preview';
     pictureUploadPreview.style.filter = '';
   };
 
-  // Функции и события открытия и закрытия окна загрузки и редактирования
-
-  var onPictureUploadEscPress = function (evt) {
-    if (evt.keyCode === window.data.ESC_KEYCODE) {
-      window.data.addHidden(pictureUploadOverlay);
-      resetLoadedPicture();
-      window.preview.closeBigPicture();
-      inputResetUpload();
-    }
-  };
-
   // функция сброса полей хэштег и описания (удаление текста из полей)
 
-  var inputResetUpload = function () {
+  window.inputResetUpload = function () {
     window.validation.hashtagUploadFile.value = '';
     window.validation.descriptionUploadFile.value = '';
   };
@@ -45,23 +123,23 @@
   // именованная функция закрытия окна загрузки и редактирования файлов
 
   var closePictureUpload = function () {
-    window.data.addHidden(pictureUploadOverlay);
+    window.addHidden(pictureUploadOverlay);
 
     // сброс стиля эффектов и удаление класса эффекта при закрытии
 
     resetLoadedPicture();
-    document.removeEventListener('keydown', onPictureUploadEscPress);
+    document.removeEventListener('keydown', window.onPressEscKey);
   };
 
   // именованная функция открытия окна загрузки и редактирования файлов
 
   var openPictureUpload = function () {
-    window.data.removeHidden(pictureUploadOverlay);
-    document.addEventListener('keydown', onPictureUploadEscPress);
+    window.removeHidden(pictureUploadOverlay);
+    document.addEventListener('keydown', window.onPressEscKey);
 
     // прячем ползунок при загрузке новой картинки
 
-    window.data.addHidden(effectLevel);
+    window.addHidden(effectLevel);
     resetAllStyleEffect();
 
     uploadCancel.addEventListener('click', function () {
@@ -71,21 +149,21 @@
     // устанавливаем и снимаем фокус с поля описания для события запрета закрытия окна загрузки файла
 
     window.validation.descriptionUploadFile.addEventListener('focus', function () {
-      document.removeEventListener('keydown', onPictureUploadEscPress);
+      document.removeEventListener('keydown', window.onPressEscKey);
     });
 
     window.validation.descriptionUploadFile.addEventListener('blur', function () {
-      document.addEventListener('keydown', onPictureUploadEscPress);
+      document.addEventListener('keydown', window.onPressEscKey);
     });
 
     // устанавливаем и снимаем фокус с поля хэштегов для события запрета закрытия окна загрузки файла
 
     window.validation.hashtagUploadFile.addEventListener('focus', function () {
-      document.removeEventListener('keydown', onPictureUploadEscPress);
+      document.removeEventListener('keydown', window.onPressEscKey);
     });
 
     window.validation.hashtagUploadFile.addEventListener('blur', function () {
-      document.addEventListener('keydown', onPictureUploadEscPress);
+      document.addEventListener('keydown', window.onPressEscKey);
     });
   };
 
@@ -108,7 +186,7 @@
     // условие добавления класса
 
     if (evt.target.value !== 'none') {
-      window.data.removeHidden(effectLevel);
+      window.removeHidden(effectLevel);
 
       // находим общее у всех классов и будем добавляеть слово в зависимости от приминяемого эффекта
 
@@ -119,7 +197,7 @@
 
     switch (evt.target.value) {
       case 'none': pictureUploadPreview.style.filter = '';
-        window.data.addHidden(effectLevel);
+        window.addHidden(effectLevel);
         break;
       case 'chrome': pictureUploadPreview.style.filter = 'grayscale(1)';
         break;
@@ -158,10 +236,10 @@
   var scaleControlPlus = pictureUploadOverlay.querySelector('.scale__control--bigger');
 
   var zoomOut = function () {
-    var scaleSmaller = parseInt(scaleControlValue.value, 10) - window.data.SCALE_STEP;
+    var scaleSmaller = parseInt(scaleControlValue.value, 10) - window.SCALE_STEP;
 
-    if (scaleSmaller <= window.data.MIN_SCALE) {
-      scaleSmaller = window.data.MIN_SCALE;
+    if (scaleSmaller <= window.MIN_SCALE) {
+      scaleSmaller = window.MIN_SCALE;
     }
     scaleControlValue.value = scaleSmaller + '%';
 
@@ -171,10 +249,10 @@
   // Функция увеличения изображенияи и изминение стиля
 
   var zoomIn = function () {
-    var scaleBigger = parseInt(scaleControlValue.value, 10) + window.data.SCALE_STEP;
+    var scaleBigger = parseInt(scaleControlValue.value, 10) + window.SCALE_STEP;
 
-    if (scaleBigger >= window.data.MAX_SCALE) {
-      scaleBigger = window.data.MAX_SCALE;
+    if (scaleBigger >= window.MAX_SCALE) {
+      scaleBigger = window.MAX_SCALE;
     }
     scaleControlValue.value = scaleBigger + '%';
 
@@ -255,9 +333,14 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
+  // Отправка формы нажатием на кнопку
+  uploadFormPicture.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    upload(new FormData(uploadFormPicture), onSucces);
+  });
 
   window.form = {
-    onPictureUploadEscPress: onPictureUploadEscPress
+    pictureUploadOverlay: pictureUploadOverlay
   };
 })();
 

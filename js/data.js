@@ -4,56 +4,21 @@
 
   // Записываем данные в переменные
 
-  // var PHOTO_COUNT = 25;
-  // var MIN_LIKES = 15;
-  // var MAX_LIKES = 200;
-  // var MIN_COMMENT = 1;
-  var MAX_COMMENT = 2;
-  // var MIN_AVATAR = 1;
-  // var MAX_AVATAR = 6;
-  var ESC_KEYCODE = 27;
-  var MIN_SCALE = 25;
-  var MAX_SCALE = 100;
-  var SCALE_STEP = 25;
-
-  // var COMMENTS = [
-  //   'Всё отлично!',
-  //   'В целом всё неплохо. Но не всё.',
-  //   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  //   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  //   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  //   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  // ];
-
-  // var DESCRIPTIONS = [
-  //   'Мы сделали это!',
-  //   'Что вы об этом думаете?',
-  //   'Работать. Копить. Путешествовать. Повторить.',
-  //   'Нечего добавить',
-  //   '*Добавить остроумную подпись*',
-  //   'Да, еще одно фото'
-  // ];
-
-  // Добавляем имена коментаторов
-
-  // var NAMES = [
-  //   'Даша',
-  //   'Никита',
-  //   'Антон',
-  //   'Борис',
-  //   'Ярис',
-  //   'Даня'
-  // ];
+  window.MAX_COMMENT = 2;
+  window.ESC_KEYCODE = 27;
+  window.MIN_SCALE = 25;
+  window.MAX_SCALE = 100;
+  window.SCALE_STEP = 25;
 
   // добавление класса hidden к селектору
 
-  var addHidden = function (selector) {
+  window.addHidden = function (selector) {
     selector.classList.add('hidden');
   };
 
   // удаление класса hidden у селектора
 
-  var removeHidden = function (selector) {
+  window.removeHidden = function (selector) {
     selector.classList.remove('hidden');
   };
 
@@ -71,21 +36,21 @@
 
   // функция добавления доп. класса для скрытия блока visually-hidden
 
-  var hideElement = function (selector1, selector2, classElement) {
+  window.hideElement = function (selector1, selector2, classElement) {
     var selectorMain1 = document.querySelector(selector1);
     selectorMain1.classList.add(classElement);
     var selectorMain2 = document.querySelector(selector2);
     selectorMain2.classList.add(classElement);
   };
 
-  window.data = {
-    MAX_COMMENT: MAX_COMMENT,
-    ESC_KEYCODE: ESC_KEYCODE,
-    SCALE_STEP: SCALE_STEP,
-    MIN_SCALE: MIN_SCALE,
-    MAX_SCALE: MAX_SCALE,
-    addHidden: addHidden,
-    removeHidden: removeHidden,
-    hideElement: hideElement
+  // Функции и события открытия и закрытия окна загрузки и редактирования
+
+  window.onPressEscKey = function (evt) {
+    if (evt.keyCode === window.ESC_KEYCODE) {
+      addHidden(window.form.pictureUploadOverlay);
+      resetLoadedPicture();
+      inputResetUpload();
+      window.closeBigPicture();
+    }
   };
 })();

@@ -22,8 +22,8 @@
     // открытие маленькое картинки
 
     pictureElement.addEventListener('click', function () {
-      window.preview.openBigPicture();
-      window.preview.renderBigPictureItem(picture);
+      window.openBigPicture();
+      window.renderBigPictureItem(picture);
     });
 
     return pictureElement;
@@ -41,5 +41,5 @@
     userPicturesItem.appendChild(fragment);
   };
 
-  window.load.loadData(window.load.URL_DATA, renderUserPictures);
+  window.load.loadData(window.load.URL_LOAD, renderUserPictures);
 })();
