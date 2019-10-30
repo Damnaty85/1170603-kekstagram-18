@@ -2,8 +2,7 @@
 // Загружаем данные для картинок-постов с сервера
 
 (function () {
-  var URL_LOAD = 'https://js.dump.academy/kekstagram/data';
-  var STATUS_OK = 200;
+
   var TIME_OUT = 10000;
 
   var loadData = function (URL, onSuccess) {
@@ -11,8 +10,10 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === STATUS_OK) {
-        onSuccess(xhr.response);
+      if (xhr.status === window.data.STATUS_OK) {
+        window.XhrDataImgPosts = xhr.response;
+        onSuccess(window.XhrDataImgPosts);
+        document.querySelector('.img-filters').classList.remove('img-filters--inactive');
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
@@ -52,7 +53,7 @@
   };
 
   window.load = {
-    URL_LOAD: URL_LOAD,
-    loadData: loadData,
+    loadData: loadData
   };
+
 })();
