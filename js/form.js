@@ -18,7 +18,7 @@
   // Функции и события открытия и закрытия окна загрузки и редактирования
 
   var onPressEscKey = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.data.ESC_KEYCODE) {
       window.data.addHidden(pictureUploadOverlay);
       resetLoadedPicture();
       inputResetUpload();

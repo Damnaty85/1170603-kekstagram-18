@@ -11,7 +11,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === STATUS_OK) {
+      if (xhr.status === window.data.STATUS_OK) {
         onSuccess();
       } else {
         onError();
@@ -21,7 +21,7 @@
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
-    xhr.open('POST', URL_UPLOAD);
+    xhr.open('POST', window.data.URL_UPLOAD);
     xhr.send(data);
   };
 
@@ -49,7 +49,7 @@
 
     // Обработчик клавиши ESC
     var onElementEscPress = function (evt) {
-      if (evt.keyCode === ESC_KEYCODE) {
+      if (evt.keyCode === window.data.ESC_KEYCODE) {
         dialogElementRemove();
       }
     };

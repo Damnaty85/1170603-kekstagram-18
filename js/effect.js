@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var MIN_SCALE = 25;
+  var MAX_SCALE = 100;
+  var SCALE_STEP = 25;
 
   var mainSectionUpload = document.querySelector('.img-upload');
   var pictureUploadPreview = mainSectionUpload.querySelector('.img-upload__preview');

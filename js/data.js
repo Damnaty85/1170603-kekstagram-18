@@ -2,27 +2,11 @@
 
 (function () {
 
-  // Записываем данные в глобальные переменные сразу
+  var ESC_KEYCODE = 27;
 
-  window.MAX_COMMENT = 2;
-  window.ESC_KEYCODE = 27;
-  window.MIN_SCALE = 25;
-  window.MAX_SCALE = 100;
-  window.SCALE_STEP = 25;
-
-  window.MAX_SYMBOL_HASHTAG = 5;
-  window.MAX_HASHTAG = 20;
-
-  window.LENGTH_COMMENT = 140;
-
-  window.URL_LOAD = 'https://js.dump.academy/kekstagram/data';
-  window.URL_UPLOAD = 'https://js.dump.academy/kekstagram';
-
-  window.STATUS_OK = 200;
-  window.TIME_OUT = 10000;
-
-  window.RANDOM_PICTURE = 10;
-  window.DEBOUNCE = 500;
+  var URL_LOAD = 'https://js.dump.academy/kekstagram/data';
+  var URL_UPLOAD = 'https://js.dump.academy/kekstagram';
+  var STATUS_OK = 200;
 
   // добавление класса hidden к селектору
 
@@ -46,6 +30,10 @@
   };
 
   window.data = {
+    ESC_KEYCODE: ESC_KEYCODE,
+    URL_LOAD: URL_LOAD,
+    URL_UPLOAD: URL_UPLOAD,
+    STATUS_OK: STATUS_OK,
     addHidden: addHidden,
     removeHidden: removeHidden,
     hideElement: hideElement

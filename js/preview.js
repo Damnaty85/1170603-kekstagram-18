@@ -2,6 +2,8 @@
 
 (function () {
 
+  var MAX_COMMENT = 2;
+
   var bigPictureItem = document.querySelector('.big-picture');
   var bigPictureCommentsList = bigPictureItem.querySelector('.social__comments');
   var pictureCommentTemplate = bigPictureCommentsList.querySelector('.social__comment');

@@ -2,6 +2,10 @@
 
 (function () {
 
+  var MAX_SYMBOL_HASHTAG = 5;
+  var MAX_HASHTAG = 20;
+  var LENGTH_COMMENT = 140;
+
   var hashtagUploadFile = document.querySelector('.text__hashtags');
   var descriptionUploadFile = document.querySelector('.text__description');
 
@@ -34,7 +38,7 @@
       } else if (hashtagItem.charAt(0) === '#' && hashtagItem.length === 1) {
         errorMessage = 'Хеш-тег не может состоять только из одной решётки';
       } else if (hashtags.length > MAX_SYMBOL_HASHTAG) {
-        errorMessage = 'Допустимое количество  хэш-тегов  не более ' +  MAX_SYMBOL_HASHTAG + '.';
+        errorMessage = 'Допустимое количество  хэш-тегов  не более ' + MAX_SYMBOL_HASHTAG + '.';
       } else if (hashtagItem.length > MAX_HASHTAG) {
         errorMessage = 'Максимальная длина одного хэш-тега ' + MAX_HASHTAG + ' символов, включая решётку';
       } else if (checkSimilarHashtags(hashtags)) {

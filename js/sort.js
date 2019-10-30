@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var RANDOM_PICTURE = 10;
+  var DEBOUNCE = 500;
+
   var picturesContainerElement = document.querySelector('.pictures');
 
   var pictureSortsSection = document.querySelector('.img-filters');

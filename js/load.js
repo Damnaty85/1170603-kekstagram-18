@@ -2,12 +2,15 @@
 // Загружаем данные для картинок-постов с сервера
 
 (function () {
+
+  var TIME_OUT = 10000;
+
   var loadData = function (URL, onSuccess) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === STATUS_OK) {
+      if (xhr.status === window.data.STATUS_OK) {
         window.XhrDataImgPosts = xhr.response;
         onSuccess(window.XhrDataImgPosts);
         document.querySelector('.img-filters').classList.remove('img-filters--inactive');

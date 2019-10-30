@@ -41,7 +41,7 @@
     userPicturesItem.appendChild(fragment);
   };
 
-  window.load.loadData(URL_LOAD, renderUserPictures);
+  window.load.loadData(window.data.URL_LOAD, renderUserPictures);
 
   window.picture = {
     renderUserPictures: renderUserPictures
