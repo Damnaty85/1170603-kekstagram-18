@@ -11,8 +11,8 @@
     var userPictureTemplate = document.querySelector('#picture')
       .content
       .querySelector('.picture');
-
     userPictureTemplate.tabIndex = 1;
+
     var pictureElement = userPictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('.picture__img').src = picture.url;
@@ -41,5 +41,9 @@
     userPicturesItem.appendChild(fragment);
   };
 
-  window.load.loadData(window.load.URL_LOAD, renderUserPictures);
+  window.load.loadData(URL_LOAD, renderUserPictures);
+
+  window.picture = {
+    renderUserPictures: renderUserPictures
+  };
 })();

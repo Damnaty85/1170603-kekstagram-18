@@ -2,13 +2,27 @@
 
 (function () {
 
-  // Записываем данные в переменные
+  // Записываем данные в глобальные переменные сразу
 
-  var MAX_COMMENT = 2;
-  var ESC_KEYCODE = 27;
-  var MIN_SCALE = 25;
-  var MAX_SCALE = 100;
-  var SCALE_STEP = 25;
+  window.MAX_COMMENT = 2;
+  window.ESC_KEYCODE = 27;
+  window.MIN_SCALE = 25;
+  window.MAX_SCALE = 100;
+  window.SCALE_STEP = 25;
+
+  window.MAX_SYMBOL_HASHTAG = 5;
+  window.MAX_HASHTAG = 20;
+
+  window.LENGTH_COMMENT = 140;
+
+  window.URL_LOAD = 'https://js.dump.academy/kekstagram/data';
+  window.URL_UPLOAD = 'https://js.dump.academy/kekstagram';
+
+  window.STATUS_OK = 200;
+  window.TIME_OUT = 10000;
+
+  window.RANDOM_PICTURE = 10;
+  window.DEBOUNCE = 500;
 
   // добавление класса hidden к селектору
 
@@ -22,18 +36,6 @@
     selector.classList.remove('hidden');
   };
 
-  // Функция вовращает рандомное число между минимальным(включительно) и максимальным(включительно)
-
-  // var getRandomNumber = function (min, max) {
-  //   return Math.round((Math.random() * (max - min)) + min);
-  // };
-
-  //  Обращается к случайному элементу в массиве, генерируя случайное число с плавающей точкой от нуля до длины массива и округляя его до ближайшего целого числа
-
-  // var getRandomElement = function (array) {
-  //   return array[Math.floor(Math.random() * array.length)];
-  // };
-
   // функция добавления доп. класса для скрытия блока visually-hidden
 
   var hideElement = function (selector1, selector2, classElement) {
@@ -44,11 +46,6 @@
   };
 
   window.data = {
-    MAX_COMMENT: MAX_COMMENT,
-    ESC_KEYCODE: ESC_KEYCODE,
-    SCALE_STEP: SCALE_STEP,
-    MIN_SCALE: MIN_SCALE,
-    MAX_SCALE: MAX_SCALE,
     addHidden: addHidden,
     removeHidden: removeHidden,
     hideElement: hideElement
