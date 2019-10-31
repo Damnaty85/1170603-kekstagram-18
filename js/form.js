@@ -42,6 +42,7 @@
 
     resetLoadedPicture();
     document.removeEventListener('keydown', onPressEscKey);
+    document.querySelector('body').style = '';
   };
 
   // именованная функция открытия окна загрузки и редактирования файлов
@@ -78,6 +79,7 @@
     window.validation.hashtagUploadFile.addEventListener('blur', function () {
       document.addEventListener('keydown', onPressEscKey);
     });
+    document.querySelector('body').style = 'overflow: hidden;';
   };
 
   uploadFilePicture.addEventListener('change', function () {
