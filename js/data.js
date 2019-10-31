@@ -14,19 +14,26 @@
     selector.classList.add('hidden');
   };
 
+  var addHiddenClass = function (selector, classElement) {
+    var element = document.querySelector(selector);
+    return element.classList.add(classElement);
+  };
+
   // удаление класса hidden у селектора
 
   var removeHidden = function (selector) {
     selector.classList.remove('hidden');
   };
 
-  // функция добавления доп. класса для скрытия блока visually-hidden
+  var removeHiddenClass = function (selector, classElement) {
+    var element = document.querySelector(selector);
+    return element.classList.remove(classElement);
+  };
 
-  var hideElement = function (selector1, selector2, classElement) {
-    var selectorMain1 = document.querySelector(selector1);
-    selectorMain1.classList.add(classElement);
-    var selectorMain2 = document.querySelector(selector2);
-    selectorMain2.classList.add(classElement);
+  // Функция подсветки поля в случае не валидации
+
+  var errorInputOutline = function (selector) {
+    selector.style = 'outline: 2px solid red';
   };
 
   window.data = {
@@ -34,8 +41,10 @@
     URL_LOAD: URL_LOAD,
     URL_UPLOAD: URL_UPLOAD,
     STATUS_OK: STATUS_OK,
+    addHiddenClass: addHiddenClass,
+    removeHiddenClass: removeHiddenClass,
     addHidden: addHidden,
     removeHidden: removeHidden,
-    hideElement: hideElement
+    errorInputOutline: errorInputOutline
   };
 })();

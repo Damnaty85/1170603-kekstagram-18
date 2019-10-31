@@ -11,7 +11,7 @@
     var userPictureTemplate = document.querySelector('#picture')
       .content
       .querySelector('.picture');
-    userPictureTemplate.tabIndex = 1;
+    userPictureTemplate.tabIndex = 2;
 
     var pictureElement = userPictureTemplate.cloneNode(true);
 
@@ -24,6 +24,7 @@
     pictureElement.addEventListener('click', function () {
       window.preview.openBigPicture();
       window.preview.renderBigPictureItem(picture);
+      document.querySelector('body').style = 'overflow: hidden;';
     });
 
     return pictureElement;

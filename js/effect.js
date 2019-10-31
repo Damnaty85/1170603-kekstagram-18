@@ -13,6 +13,7 @@
   //  Перемещение ползунка и изминение интенсивности
 
   var effectLevelValue = effectLevel.querySelector('.effect-level__value');
+  // иначе форма не отправляется и в консоли ошибка если поле не сделать readonly
   effectLevelValue.readOnly = 'true';
   var effectLevelLine = effectLevel.querySelector('.effect-level__line');
   var effectLevelPin = effectLevel.querySelector('.effect-level__pin');
