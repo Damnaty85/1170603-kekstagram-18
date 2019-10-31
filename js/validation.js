@@ -59,7 +59,7 @@
 
   // валидация описания к новой картинке
 
-  var descriptionValidity = function() {
+  var descriptionValidity = function () {
     var errorMessage = '';
     var descriptionValue = descriptionUploadFile.value.trim();
 
