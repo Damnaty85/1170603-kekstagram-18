@@ -13,7 +13,7 @@
       if (xhr.status === window.data.STATUS_OK) {
         window.XhrDataImgPosts = xhr.response;
         onSuccess(window.XhrDataImgPosts);
-        document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+        window.data.removeHiddenClass('.img-filters', 'img-filters--inactive');
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
@@ -36,8 +36,7 @@
     scrollTo(0, 0);
 
     var divErrorElement = document.createElement('div');
-    divErrorElement.style =
-      'margin: 0 auto; padding: 15px 0; font-size: 30px; text-align: center; background-color: #ff4e4e';
+    divErrorElement.style = 'margin: 0 auto; padding: 15px 0; font-size: 30px; text-align: center; background-color: #ff4e4e';
     divErrorElement.style.position = 'absolute';
     divErrorElement.style.zIndex = '100';
     divErrorElement.style.left = 0;

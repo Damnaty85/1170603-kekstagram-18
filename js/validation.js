@@ -33,25 +33,33 @@
     hashtags.forEach(function (hashtagItem) {
       if (hashtagItem.charAt(0) !== '#') {
         errorMessage = 'Хэш-тег должен начинаться с символа #';
+        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtagItem.indexOf('#', 1) > 1) {
         errorMessage = 'Хэш-теги разделяются пробелами';
+        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtagItem.charAt(0) === '#' && hashtagItem.length === 1) {
         errorMessage = 'Хеш-тег не может состоять только из одной решётки';
+        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtags.length > MAX_SYMBOL_HASHTAG) {
         errorMessage = 'Допустимое количество  хэш-тегов  не более ' + MAX_SYMBOL_HASHTAG + '.';
+        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtagItem.length > MAX_HASHTAG) {
         errorMessage = 'Максимальная длина одного хэш-тега ' + MAX_HASHTAG + ' символов, включая решётку';
+        window.data.errorInputOutline(hashtagUploadFile);
       } else if (checkSimilarHashtags(hashtags)) {
         errorMessage = 'Хэштеги не должны повторяться';
+        window.data.errorInputOutline(hashtagUploadFile);
       }
     });
 
     hashtagUploadFile.setCustomValidity(errorMessage);
   };
 
+  hashtagUploadFile.addEventListener('change', hashtagValidation);
+
   // валидация описания к новой картинке
 
-  function descriptionValidity() {
+  var descriptionValidity = function () {
     var errorMessage = '';
     var descriptionValue = descriptionUploadFile.value.trim();
 
@@ -64,14 +72,13 @@
       if (descriptionItem.length > LENGTH_COMMENT) {
         errorMessage = 'Максимальная длина комментария ' + LENGTH_COMMENT + ' символов';
       }
+      window.data.errorInputOutline(descriptionUploadFile);
     });
 
     descriptionUploadFile.setCustomValidity(errorMessage);
-  }
+  };
 
   descriptionUploadFile.addEventListener('input', descriptionValidity);
-
-  hashtagUploadFile.addEventListener('input', hashtagValidation);
 
   window.validation = {
     hashtagUploadFile: hashtagUploadFile,
