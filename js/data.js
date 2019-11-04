@@ -40,7 +40,7 @@
 
   // сброс валидации и удаление обводки при закрытии окна загрузки нового файла
 
-  var resetInputValidation = function(selector){
+  var resetInputValidation = function (selector) {
     selector.setCustomValidity('');
     selector.style.outline = 'none';
   };
