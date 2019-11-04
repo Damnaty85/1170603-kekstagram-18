@@ -87,7 +87,8 @@
     pictureUploadOverlay: pictureUploadOverlay,
     onPressEscKey: onPressEscKey,
     closePictureUpload: closePictureUpload,
-    uploadFormPicture: uploadFormPicture
+    uploadFormPicture: uploadFormPicture,
+    uploadFilePicture: uploadFilePicture
   };
 })();
 

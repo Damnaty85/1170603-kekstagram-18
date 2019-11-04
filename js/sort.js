@@ -5,7 +5,6 @@
   var DEBOUNCE = 500;
 
   var picturesContainerElement = document.querySelector('.pictures');
-
   var pictureSortsSection = document.querySelector('.img-filters');
   var pictureSortPopular = pictureSortsSection.querySelector('#filter-popular');
   var pictureSortRandom = pictureSortsSection.querySelector('#filter-random');

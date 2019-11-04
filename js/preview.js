@@ -51,28 +51,21 @@
   // показываем первые пять комментариев работа кнопки еще и показ следующих комментов
 
   var createComments = function (pictureData) {
-    // Клонируем массив
     var commentsCloneArray = pictureData.comments.slice();
-
-    // удаляем все комментарии
     clearBigPictureComments();
 
-    // делаем функцию глобальной чтобы в дальнейщем можно было удалить обработчик с кнопки "Загрузить еще" иначе будет undifined
+    // делаем функцию глобальной чтобы в дальнейщем можно было удалить обработчик иначе undifined
     window.preview.onCommentLoadClick = function () {
       var bigPictureCommentArray = commentsCloneArray.splice(0, MAX_COMMENT);
 
-      // Если массив пуст скрываем кнопку 'Загрузить еще'
       if (commentsCloneArray.length === 0) {
         window.data.addHiddenClass('.social__comments-loader', 'visually-hidden');
       }
 
       renderBigPictureComments(bigPictureCommentArray);
     };
-
-    // Создаем первых 5 комментариев и вставляем в пост
     window.preview.onCommentLoadClick();
 
-    // При клике на кнопке 'Загрузить еще' вставит еще 5 комментариев
     commentsLoadButton.addEventListener('click', window.preview.onCommentLoadClick);
   };
 
