@@ -61,7 +61,6 @@
     window.preview.onCommentLoadClick = function () {
       var bigPictureCommentArray = commentsCloneArray.splice(0, MAX_COMMENT);
 
-      // Если массив пуст скрываем кнопку 'Загрузить еще'
       if (commentsCloneArray.length === 0) {
         window.data.addHiddenClass('.social__comments-loader', 'visually-hidden');
       }
