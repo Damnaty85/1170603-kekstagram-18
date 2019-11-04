@@ -120,7 +120,7 @@
 
   // функция определяет класс в массиве и в соответствие с этим использует правильный стиль фильтра и расчет
 
-  var changeEffectValue = function () {
+  var onValueEffectChange = function () {
 
     // перевод координат из абсолютных значений в относительные
 
@@ -175,7 +175,7 @@
     };
 
     document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mousemove', changeEffectValue);
+    document.addEventListener('mousemove', onValueEffectChange);
 
     document.addEventListener('mouseup', onMouseUp);
   });

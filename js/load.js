@@ -11,8 +11,8 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === window.data.STATUS_OK) {
-        window.XhrDataImgPosts = xhr.response;
-        onSuccess(window.XhrDataImgPosts);
+        window.xhrDataPicture = xhr.response;
+        onSuccess(window.xhrDataPicture);
         window.data.removeHiddenClass('.img-filters', 'img-filters--inactive');
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
