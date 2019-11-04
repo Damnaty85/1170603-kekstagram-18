@@ -8,7 +8,7 @@
   var effectPreviewPicture = document.querySelectorAll('.effects__preview');
   previewPicture.parentElement.style = 'background-color: unset';
 
-  var renderNewImages = function (imageDataURL) {
+  var renderPreviewEffect = function (imageDataURL) {
     previewPicture.src = imageDataURL;
     for (var i = effectPreviewPicture.length; i--;) {
       effectPreviewPicture[i].style.backgroundImage = 'url("' + imageDataURL + '")';
@@ -28,11 +28,14 @@
 
       reader.addEventListener('load', function () {
         previewPicture.src = reader.result;
-        renderNewImages(previewPicture.src);
+        renderPreviewEffect(previewPicture.src);
       });
 
       reader.readAsDataURL(file);
     } else {
+
+      // вызываем заготовленное окно ошибки и меняем в нем текст
+
       window.upload.onError();
       document.querySelector('.error__title').textContent = ERROR_TEXT;
     }

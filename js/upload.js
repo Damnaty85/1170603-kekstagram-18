@@ -82,7 +82,7 @@
     closeDialog('success');
   };
 
-  // Действия при ошибке при отправке на сервер
+  // Действия при ошибке отправки на сервер
 
   var onError = function () {
     window.form.closePictureUpload();
