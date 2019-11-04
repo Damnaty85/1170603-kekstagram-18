@@ -62,20 +62,20 @@
   // Обработчик кнопки "Популярные"
 
   var onSortPopularClick = function () {
-    onFilterButtonClick(window.XhrDataImgPosts);
+    onFilterButtonClick(window.xhrDataPicture);
   };
 
   // Обработчик кнопки "Случайные"
 
   var onSortRandomClick = function () {
-    var randomPicture = shuffle(window.XhrDataImgPosts.slice(0, RANDOM_PICTURE));
+    var randomPicture = shuffle(window.xhrDataPicture.slice()).slice(0, RANDOM_PICTURE);
     onFilterButtonClick(randomPicture);
   };
 
   // Обработчик кнопки "Обсуждаемые"
 
   var onSortDiscussClick = function () {
-    var discussedPosts = window.XhrDataImgPosts.slice().sort(function (a, b) {
+    var discussedPosts = window.xhrDataPicture.slice().sort(function (a, b) {
       return b.comments.length - a.comments.length;
     });
     onFilterButtonClick(discussedPosts);

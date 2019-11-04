@@ -2,8 +2,8 @@
 
 (function () {
 
-  var uploadFormPicture = document.getElementById('upload-select-image');
-  var uploadFilePicture = document.getElementById('upload-file');
+  var uploadFormPicture = document.querySelector('#upload-select-image');
+  var uploadFilePicture = document.querySelector('#upload-file');
   var pictureUploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadCancel = pictureUploadOverlay.querySelector('#upload-cancel');
 
@@ -13,6 +13,8 @@
     uploadFormPicture.reset();
     window.effect.pictureUploadPreview.className = 'img-upload__preview';
     window.effect.pictureUploadPreview.style.filter = '';
+    window.data.resetInputValidation(window.validation.hashtagUploadFile);
+    window.data.resetInputValidation(window.validation.descriptionUploadFile);
   };
 
   // Функции и события открытия и закрытия окна загрузки и редактирования
@@ -21,16 +23,7 @@
     if (evt.keyCode === window.data.ESC_KEYCODE) {
       window.data.addHidden(pictureUploadOverlay);
       resetLoadedPicture();
-      inputResetUpload();
-      window.preview.closeBigPicture();
     }
-  };
-
-  // функция сброса полей хэштег и описания (удаление текста из полей)
-
-  var inputResetUpload = function () {
-    window.validation.hashtagUploadFile.value = '';
-    window.validation.descriptionUploadFile.value = '';
   };
 
   // именованная функция закрытия окна загрузки и редактирования файлов
@@ -39,10 +32,8 @@
     window.data.addHidden(pictureUploadOverlay);
 
     // сброс стиля эффектов и удаление класса эффекта при закрытии
-
     resetLoadedPicture();
     document.removeEventListener('keydown', onPressEscKey);
-    document.querySelector('body').style = '';
   };
 
   // именованная функция открытия окна загрузки и редактирования файлов
@@ -79,7 +70,6 @@
     window.validation.hashtagUploadFile.addEventListener('blur', function () {
       document.addEventListener('keydown', onPressEscKey);
     });
-    document.querySelector('body').style = 'overflow: hidden;';
   };
 
   uploadFilePicture.addEventListener('change', function () {
@@ -87,17 +77,17 @@
   });
 
   // Отправка формы нажатием на кнопку
+
   uploadFormPicture.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.upload.uploadData(new FormData(uploadFormPicture), window.upload.onSucces);
   });
 
   window.form = {
-    uploadFormPicture: uploadFormPicture,
     pictureUploadOverlay: pictureUploadOverlay,
     onPressEscKey: onPressEscKey,
-    inputResetUpload: inputResetUpload,
-    closePictureUpload: closePictureUpload
+    closePictureUpload: closePictureUpload,
+    uploadFormPicture: uploadFormPicture
   };
 })();
 

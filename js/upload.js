@@ -42,7 +42,7 @@
 
     // Скрывает попап, удаляет обработчик ESC
 
-    var dialogElementRemove = function () {
+    var onDialogElementRemove = function () {
       dialogElement.remove();
       document.removeEventListener('keydown', onElementEscPress);
     };
@@ -50,15 +50,15 @@
     // Обработчик клавиши ESC
     var onElementEscPress = function (evt) {
       if (evt.keyCode === window.data.ESC_KEYCODE) {
-        dialogElementRemove();
+        onDialogElementRemove();
       }
     };
 
     // Проверяет есть ли клик на попап
 
-    var dialogRemove = function (evt) {
+    var onDialogRemove = function (evt) {
       if (!evt.target.closest('.' + dialogSelector + '__inner')) {
-        dialogElementRemove();
+        onDialogElementRemove();
       }
     };
 
@@ -66,10 +66,10 @@
 
     document.addEventListener('keydown', onElementEscPress);
     // Закрывает по клику на произвольную область экрана
-    dialogElement.addEventListener('click', dialogRemove);
+    dialogElement.addEventListener('click', onDialogRemove);
     // Закрывает по клику на buttons
     dialogButtonElements.forEach(function (item) {
-      item.addEventListener('click', dialogElementRemove);
+      item.addEventListener('click', onDialogElementRemove);
     });
   };
 
@@ -93,6 +93,7 @@
 
   window.upload = {
     uploadData: uploadData,
-    onSucces: onSucces
+    onSucces: onSucces,
+    onError: onError
   };
 })();

@@ -24,9 +24,8 @@
     pictureElement.addEventListener('click', function () {
       window.preview.openBigPicture();
       window.preview.renderBigPictureItem(picture);
-      document.querySelector('body').style = 'overflow: hidden;';
+      document.querySelector('body').classList.add('modal-open');
     });
-
     return pictureElement;
   };
 

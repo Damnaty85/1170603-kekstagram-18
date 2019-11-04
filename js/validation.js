@@ -21,7 +21,7 @@
     return false;
   };
 
-  var hashtagValidation = function () {
+  var onHashtagValidationCheck = function () {
     var errorMessage = '';
     var hashtagValue = hashtagUploadFile.value.trim();
 
@@ -33,55 +33,44 @@
     hashtags.forEach(function (hashtagItem) {
       if (hashtagItem.charAt(0) !== '#') {
         errorMessage = 'Хэш-тег должен начинаться с символа #';
-        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtagItem.indexOf('#', 1) > 1) {
         errorMessage = 'Хэш-теги разделяются пробелами';
-        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtagItem.charAt(0) === '#' && hashtagItem.length === 1) {
         errorMessage = 'Хеш-тег не может состоять только из одной решётки';
-        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtags.length > MAX_SYMBOL_HASHTAG) {
         errorMessage = 'Допустимое количество  хэш-тегов  не более ' + MAX_SYMBOL_HASHTAG + '.';
-        window.data.errorInputOutline(hashtagUploadFile);
       } else if (hashtagItem.length > MAX_HASHTAG) {
         errorMessage = 'Максимальная длина одного хэш-тега ' + MAX_HASHTAG + ' символов, включая решётку';
-        window.data.errorInputOutline(hashtagUploadFile);
       } else if (checkSimilarHashtags(hashtags)) {
         errorMessage = 'Хэштеги не должны повторяться';
-        window.data.errorInputOutline(hashtagUploadFile);
       }
     });
 
     hashtagUploadFile.setCustomValidity(errorMessage);
   };
 
-  hashtagUploadFile.addEventListener('change', hashtagValidation);
+  // окрашивает окно в не валидный цвет при не верном заполнении
+
+  hashtagUploadFile.addEventListener('input', function () {
+    onHashtagValidationCheck();
+    window.data.highlightedInputError(hashtagUploadFile);
+  });
 
   // валидация описания к новой картинке
 
-  var descriptionValidity = function () {
-    var errorMessage = '';
-    var descriptionValue = descriptionUploadFile.value.trim();
-
-    if (descriptionValue === '') {
-      descriptionUploadFile.setCustomValidity(errorMessage);
-      return;
+  descriptionUploadFile.addEventListener('input', function (evt) {
+    var target = evt.target;
+    if (target.value.length > LENGTH_COMMENT) {
+      target.setCustomValidity('Максимальная длина комментария ' + LENGTH_COMMENT + ' символов');
+      window.data.highlightedInputError(target);
+    } else {
+      window.data.resetInputValidation(target);
     }
-    var descriptions = descriptionValue.toLowerCase().split(' ');
-    descriptions.forEach(function (descriptionItem) {
-      if (descriptionItem.length > LENGTH_COMMENT) {
-        errorMessage = 'Максимальная длина комментария ' + LENGTH_COMMENT + ' символов';
-      }
-      window.data.errorInputOutline(descriptionUploadFile);
-    });
-
-    descriptionUploadFile.setCustomValidity(errorMessage);
-  };
-
-  descriptionUploadFile.addEventListener('input', descriptionValidity);
+  });
 
   window.validation = {
     hashtagUploadFile: hashtagUploadFile,
     descriptionUploadFile: descriptionUploadFile
   };
+
 })();
