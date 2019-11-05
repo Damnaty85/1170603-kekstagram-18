@@ -3,7 +3,6 @@
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-  var fileChooser = document.querySelector('#upload-file');
   var previewPicture = document.querySelector('.img-upload__preview img');
   var effectPreviewPicture = document.querySelectorAll('.effects__preview');
   previewPicture.parentElement.style = 'background-color: unset';
@@ -15,8 +14,8 @@
     }
   };
 
-  fileChooser.addEventListener('change', function () {
-    var file = fileChooser.files[0];
+  window.form.uploadFilePicture.addEventListener('change', function () {
+    var file = window.form.uploadFilePicture.files[0];
     var fileName = file.name.toLowerCase();
 
     var matches = FILE_TYPES.some(function (it) {
