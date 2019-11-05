@@ -8,7 +8,7 @@
   var effectPreviewPicture = document.querySelectorAll('.effects__preview');
   previewPicture.parentElement.style = 'background-color: unset';
 
-  var renderNewImages = function (imageDataURL) {
+  var renderPreviewImgEffect = function (imageDataURL) {
     previewPicture.src = imageDataURL;
     for (var i = effectPreviewPicture.length; i--;) {
       effectPreviewPicture[i].style.backgroundImage = 'url("' + imageDataURL + '")';
@@ -28,7 +28,7 @@
 
       reader.addEventListener('load', function () {
         previewPicture.src = reader.result;
-        renderNewImages(previewPicture.src);
+        renderPreviewImgEffect(previewPicture.src);
       });
 
       reader.readAsDataURL(file);
