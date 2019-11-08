@@ -29,6 +29,7 @@
 
   var resetAllStyleEffect = function () {
     pictureUploadPreview.style.transform = 'scale(1)';
+    scaleControlValue.value = '100%';
     scaleControlValue.setAttribute('value', '100%');
     effectLevelValue.value = 100;
     effectLevelPin.style.left = '100%';
