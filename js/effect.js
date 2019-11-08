@@ -29,11 +29,49 @@
 
   var resetAllStyleEffect = function () {
     pictureUploadPreview.style.transform = 'scale(1)';
-    scaleControlValue.value = '100%';
+    scaleControlValue.setAttribute('value', '100%');
     effectLevelValue.value = 100;
     effectLevelPin.style.left = '100%';
     effectLevelDepth.style.width = '100%';
   };
+
+  // Функция уменьшения изображенияи и изминение стиля
+  var zoomOut = function () {
+    var scaleSmaller = parseInt(scaleControlValue.value, 10) - SCALE_STEP;
+    scaleControlValue.value = scaleSmaller;
+
+    if (scaleSmaller <= MIN_SCALE) {
+      scaleSmaller = MIN_SCALE;
+    }
+    scaleControlValue.value = scaleSmaller + '%';
+    scaleControlValue.setAttribute('value', scaleControlValue.value);
+    pictureUploadPreview.style.transform = 'scale(' + scaleSmaller / 100 + ')';
+  };
+
+  // Функция увеличения изображенияи и изминение стиля
+  var zoomIn = function () {
+    var scaleBigger = parseInt(scaleControlValue.value, 10) + SCALE_STEP;
+    scaleControlValue.value = scaleBigger;
+
+    if (scaleBigger >= MAX_SCALE) {
+      scaleBigger = MAX_SCALE;
+    }
+    scaleControlValue.value = scaleBigger + '%';
+    scaleControlValue.setAttribute('value', scaleControlValue.value);
+    pictureUploadPreview.style.transform = 'scale(' + scaleBigger / 100 + ')';
+  };
+
+  // Обработчик уменьшения изображения по клику на "-"
+
+  scaleControlMinus.addEventListener('click', function () {
+    zoomOut();
+  });
+
+  // Обработчик увеличения изображения по клику на "+"
+
+  scaleControlPlus.addEventListener('click', function () {
+    zoomIn();
+  });
 
   // Функция добаления класса в соответствие с выбраным эффектом
 
@@ -80,42 +118,6 @@
       changeEffectsPreview(evt);
       resetAllStyleEffect();
     });
-  });
-
-  var zoomOut = function () {
-    var scaleSmaller = parseInt(scaleControlValue.value, 10) - SCALE_STEP;
-
-    if (scaleSmaller <= MIN_SCALE) {
-      scaleSmaller = MIN_SCALE;
-    }
-    scaleControlValue.value = scaleSmaller + '%';
-
-    pictureUploadPreview.style.transform = 'scale(' + scaleSmaller / 100 + ')';
-  };
-
-  // Функция увеличения изображенияи и изминение стиля
-
-  var zoomIn = function () {
-    var scaleBigger = parseInt(scaleControlValue.value, 10) + SCALE_STEP;
-
-    if (scaleBigger >= MAX_SCALE) {
-      scaleBigger = MAX_SCALE;
-    }
-    scaleControlValue.value = scaleBigger + '%';
-
-    pictureUploadPreview.style.transform = 'scale(' + scaleBigger / 100 + ')';
-  };
-
-  // Обработчик уменьшения изображения по клику на "-"
-
-  scaleControlMinus.addEventListener('click', function () {
-    zoomOut();
-  });
-
-  // Обработчик увеличения изображения по клику на "+"
-
-  scaleControlPlus.addEventListener('click', function () {
-    zoomIn();
   });
 
   // функция определяет класс в массиве и в соответствие с этим использует правильный стиль фильтра и расчет

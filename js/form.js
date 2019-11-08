@@ -7,14 +7,19 @@
   var pictureUploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadCancel = pictureUploadOverlay.querySelector('#upload-cancel');
 
-  // сбрасываем класс фильтр и значение загружаемой картинки
-
   var resetLoadedPicture = function () {
+
+    // ресетим форму и сбрасываем класс фильтра
     uploadFormPicture.reset();
     window.effect.pictureUploadPreview.className = 'img-upload__preview';
     window.effect.pictureUploadPreview.style.filter = '';
+
+    // сброс валидации полей
     window.data.resetInputValidation(window.validation.hashtagUploadFile);
     window.data.resetInputValidation(window.validation.descriptionUploadFile);
+
+    // сброс эффектов и масштаба
+    window.effect.resetAllStyleEffect();
   };
 
   // Функции и события открытия и закрытия окна загрузки и редактирования
@@ -45,7 +50,6 @@
     // прячем ползунок при загрузке новой картинки
 
     window.data.addHidden(window.effect.effectLevel);
-    window.effect.resetAllStyleEffect();
 
     uploadCancel.addEventListener('click', function () {
       closePictureUpload();
