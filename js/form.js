@@ -38,6 +38,7 @@
 
     // сброс стиля эффектов и удаление класса эффекта при закрытии
     resetLoadedPicture();
+    document.querySelector('body').classList.remove('modal-open');
     document.removeEventListener('keydown', onPressEscKey);
   };
 
@@ -74,6 +75,8 @@
     window.validation.hashtagUploadFile.addEventListener('blur', function () {
       document.addEventListener('keydown', onPressEscKey);
     });
+
+    document.querySelector('body').classList.add('modal-open');
   };
 
   uploadFilePicture.addEventListener('change', function () {
